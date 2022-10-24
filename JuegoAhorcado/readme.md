@@ -7,4 +7,4 @@
 
 Para iniciar tu juego, abre tu consola y agrega este comando python3 main.py, y se te mostrara en pantalla el inicio de tu partida
 
-
+hjngvmfcvydcbncnbvxcgbxfcnb
