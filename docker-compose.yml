@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  api:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             uvicorn api_main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+
+  dashboard:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - VITE_API_BASE=http://localhost:8000
+    command: >
+      sh -c "echo 'Monta dashboard_realtime.jsx en tu proyecto Vite/React' && tail -f /dev/null"
+    ports:
+      - "5173:5173"
