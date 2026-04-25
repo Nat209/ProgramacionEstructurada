@@ -22,6 +22,35 @@ Endpoints:
 - `POST /interactions/feedback`
 - `GET /events` (Server-Sent Events)
 
+## Frontend (Vite + React)
+
+```bash
+cd frontend
+npm install
+VITE_API_BASE=http://localhost:8000 npm run dev
+```
+
+El frontend usa `dashboard_realtime.jsx` y se ejecuta en `http://localhost:5173`.
+
+## Deploy local en 1 comando
+
+```bash
+docker-compose up --build
+```
+
+Servicios:
+
+- API: `http://localhost:8000/docs`
+- Dashboard: `http://localhost:5173`
+
+## Deploy en Railway (API)
+
+1. Sube este repositorio a GitHub.
+2. Crea un proyecto en Railway conectado al repo.
+3. Railway detecta `railway.toml` y ejecuta:
+   - `uvicorn api_main:app --host 0.0.0.0 --port $PORT`
+4. Define CORS de producción en `api_main.py` si no quieres `allow_origins=["*"]`.
+
 ## Snippet Python
 
 ```python
@@ -75,16 +104,3 @@ requests.post(API + "/interactions/feedback", json={
     "metadata": {"contact_id": contact_id},
 })
 ```
-
-## Frontend
-
-Usa el componente `dashboard_realtime.jsx` en tu app Vite/React y define:
-
-```bash
-VITE_API_BASE=https://TU_API
-```
-
-## Railway
-
-Sube este repo a GitHub y crea servicio en Railway.
-`railway.toml` levanta automáticamente la API.
